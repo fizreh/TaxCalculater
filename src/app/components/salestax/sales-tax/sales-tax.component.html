@@ -1,1 +1,29 @@
-<p>sales-tax works!</p>
+<div>
+    <label>Faiza's Shopping Cart</label>
+    <h4>Basic mat-select</h4>
+<mat-form-field appearance="legacy">
+  <mat-label>Select Category</mat-label>
+  <mat-select [(ngModel)] = "selectedCategory" (selectionChange) = "onCategoryChange()" >
+    <mat-option *ngFor="let category of categories" [value]="category">
+      {{category}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width" appearance="legacy">
+    <mat-label>Price</mat-label>
+    <input type="number" matInput placeholder="1234">
+    <mat-icon matSuffix>€</mat-icon>
+  </mat-form-field>
+</div>
+<div>
+    <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option *ngFor="let goods of selectedGoods" [value]="goods.goods">
+          {{goods.goods}} |  {{goods.price}}
+        </mat-list-option>
+      </mat-selection-list>
+      
+      <p>
+        Option selected: {{shoes.selectedOptions.selected[0]?.value}}
+      </p>
+</div>
