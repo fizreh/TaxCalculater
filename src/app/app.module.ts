@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     FormsModule,
     MatInputModule,
-   MatListModule
+   MatListModule,
+   MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

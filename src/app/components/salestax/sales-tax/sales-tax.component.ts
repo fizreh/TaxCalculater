@@ -12,8 +12,11 @@ import { SalestaxService } from 'src/services/salestax.service';
 export class SalesTaxComponent implements OnInit {
  categories = ["books","medicine","food","anonymous"];
  selectedCategory: string = "";
- selectedGoods = [{goods:"",price:0}];
+ selectedGoods = [{goods:"book",name:"abc",price:0}];
  price:number = 0;
+ name: string = "";
+ displayedColumns: string[] = ['goods', 'name', 'price'];
+ dataSource : any;
 
 
   constructor(public salestaxService: SalestaxService) { }
@@ -23,8 +26,11 @@ export class SalesTaxComponent implements OnInit {
 
   onCategoryChange(){
     console.log(this.selectedCategory);
-    this.selectedGoods.push({goods:this.selectedCategory,price:this.price})
+    this.selectedGoods.push({goods:this.selectedCategory,name:this.name,price:this.price})
     console.log(this.selectedGoods)
+    this.dataSource = this.selectedGoods;
+   
+   
   }
 
 }
