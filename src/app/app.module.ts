@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SalesTaxComponent } from './components/salestax/sales-tax/sales-tax.component';
+import { DialogDataExampleDialog, SalesTaxComponent } from './components/salestax/sales-tax/sales-tax.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
@@ -14,12 +14,15 @@ import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SalestaxService } from 'src/services/salestax.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SalesTaxComponent
+    SalesTaxComponent,
+    DialogDataExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -35,9 +38,10 @@ import {MatTableModule} from '@angular/material/table';
     FormsModule,
     MatInputModule,
    MatListModule,
-   MatTableModule
+   MatTableModule,
+   MatDialogModule
   ],
-  providers: [],
+  providers: [SalestaxService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

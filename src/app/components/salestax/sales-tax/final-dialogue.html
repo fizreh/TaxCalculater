@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Fizreh's Online Grocery Reciept</h1>
+<div mat-dialog-content>
+  Your Order:
+ 
+
+  <table class="example-full-width" [datasource] = "dataSource"  cellspacing="0">
+      <tr>
+        <ng-container  matColumnDef="name" >
+    <th mat-header-cell *matHeaderCellDef> Name. </th>
+   <ng-container *ngFor = "let entry of data.finalArr; let i = index">
+    <td *ngIf = "i < data.finalArr.length  ">
+        {{entry.name}}
+    </td>
+    </ng-container>
+        </ng-container>
+        <ng-container  matColumnDef="price" >
+    <th  mat-header-cell *matHeaderCellDef> Price. </th> 
+    <ng-container *ngFor = "let entry of data.finalArr; let i = index">
+   
+    <td *ngIf = "i < data.finalArr.length  " >
+        {{entry.price}}
+</td>
+</ng-container>
+        </ng-container>
+
+  </tr>
+<tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+  
+ 
+</div>
