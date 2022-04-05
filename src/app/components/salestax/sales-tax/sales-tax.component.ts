@@ -39,6 +39,9 @@ dataSourceResult:any;
     this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price})
     console.log(this.selectedGoods)
     this.dataSource = this.selectedGoods;
+    this.price = 0;
+    this.selectedCategory = "Please Select";
+    this.name = "";
    
   }
 
