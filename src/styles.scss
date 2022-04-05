@@ -1,0 +1,54 @@
+
+@import '~@angular/material/theming';
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Shadows+Into+Light');
+
+
+
+
+
+
+// 3) style specific component
+// this would normaly be in a .scss file of your custom component
+// therefore you'd just include those .scss files here
+@mixin my-custom-component($theme) {
+  // retrieve variables from current theme 
+  // only keep those you need and remove the others
+  $text: mat-palette($mat-purple, A200, A100, A400);// map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $primary: mat-palette($mat-purple);
+
+  //$foreground: map-get($theme, foreground);
+  //$background: map-get($theme, background);
+
+  mat-form-field, .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: mat-color($text);
+  }
+  mat-raised-button {
+    color: mat-color($primary);
+  }
+  h1 {
+    color: mat-color($text);
+    font-weight: bolder;
+    font-stretch: condensed;
+  }
+}
+
+// 4) Helper which prevents us from adding all of our custom 
+// components themes one by one to each theme
+@mixin custom-components-theme($theme) {
+  @include my-custom-component($theme);
+  //.. include all custom components mixins here 
+}
+
+// 5) define default theme
+$app-primary: mat-palette($mat-indigo);
+$app-accent:  mat-palette($mat-amber, A200, A100, A400);
+$app-warn:    mat-palette($mat-red);
+$app-theme:   mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme); 
+@include custom-components-theme($app-theme);
+

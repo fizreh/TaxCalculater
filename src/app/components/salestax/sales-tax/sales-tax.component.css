@@ -8,3 +8,8 @@ table {
   td {
     padding-right: 18px;
   }
+
+  h1{
+    font-weight: bolder;
+    font-stretch: condensed;
+  }
