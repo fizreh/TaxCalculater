@@ -1,5 +1,5 @@
 table {
-    width: 50%;
+    width: 80%;
   }
 
   .m-5{
@@ -14,3 +14,11 @@ table {
     font-stretch: condensed;
     text-decoration: underline;
   }
+
+.background{
+  background-color: lightgray;
+}
+button{
+  width: 10%;
+  height: auto;
+}

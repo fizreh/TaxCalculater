@@ -25,6 +25,9 @@ export class SalesTaxComponent implements OnInit {
  finalResult:any = {};
  finalArray:any = [];
 dataSourceResult:any;
+selectedoption:string = "local";
+validPrice:boolean= true;
+
 
 
   constructor(public salestaxService: SalestaxService,public dialog: MatDialog) { }
@@ -34,15 +37,35 @@ dataSourceResult:any;
 
   onCategoryChange(){
     
-    this.dataSource = this.selectedGoods;
+    this.dataSource ="";
     console.log(this.selectedCategory);
-    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price})
+    console.log(this.selectedoption);
+    if(this.selectedoption == "imported")
+    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price,salesTax:0,local:false,addTax:0})
+    else
+    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price,salesTax:0,local:true,addTax:0})
     console.log(this.selectedGoods)
     this.dataSource = this.selectedGoods;
     this.price = 0;
     this.selectedCategory = "Please Select";
     this.name = "";
    
+  }
+
+  deleteProduct(event:string){
+    console.log("Delete Event:",event);
+    this.selectedGoods = this.selectedGoods.filter((el)=> {el.name === event});
+
+  }
+
+  onTextChange(e:any)
+  {
+    if(e.target.value <= 0)
+    {
+this.validPrice = false
+    }
+    else
+    this.validPrice = true;
   }
 
   openDialog(){
@@ -52,8 +75,9 @@ dataSourceResult:any;
       height:'500px',
       data:{
         finalArr:this.finalArray,
-        addTax:this.finalResult[0].addTax,
-        total:this.finalResult[0].total
+        salesTax:this.finalResult[0].salesTax,
+        total:this.finalResult[0].total,
+        addTax: this.finalResult[0].addTax
       }
     })
   
@@ -68,6 +92,9 @@ dataSourceResult:any;
   
 
   saveAndCalculateTax(){
+    console.log("ARRAY FROM SERVICE: ",this.salestaxService.productsSpec);
+    console.log("ARRAY FROM SERVICE: ",this.selectedGoods);
+    
     this.finalArray = this.selectedGoods;
     this.finalResult = this.salestaxService.calculateTax(this.selectedGoods);
    

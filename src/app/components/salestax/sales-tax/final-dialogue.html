@@ -1,33 +1,54 @@
 <h1 mat-dialog-title>Fizreh's Online Grocery Reciept</h1>
-<div mat-dialog-content>
+<div  align = "center" mat-dialog-content>
   Your Order:
  
 
-  <table class="example-full-width"  cellspacing="0">
-      <tr>
-        <ng-container  matColumnDef="name" >
-    <th mat-header-cell *matHeaderCellDef> Name. </th>
-   <ng-container *ngFor = "let entry of data.finalArr; let i = index">
-    <td *ngIf = "i < data.finalArr.length  ">
-        {{entry.name}}
-    </td>
-    </ng-container>
-        </ng-container>
-        <ng-container  matColumnDef="price" >
-    <th  mat-header-cell *matHeaderCellDef> Price. </th> 
-    <ng-container *ngFor = "let entry of data.finalArr; let i = index">
-   
-    <td *ngIf = "i < data.finalArr.length  " >
-        {{entry.price}}
-</td>
-</ng-container>
-        </ng-container>
+ 
 
-  </tr>
-<tr>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+ <div align = "center" style="display: flex; flex-direction: column;" >
+  
+    <div style="display: flex; flex-direction: row;margin:1%;">
+      
+        <mat-label>Name</mat-label>
+       
+     
+       
+        <mat-label  style="padding-left: 55%;">Price</mat-label>
+       </div>
+  
+     <div class="m-5" style="display: flex; flex-direction: row;" *ngFor ="let entry of data.finalArr; let i = index">
+      
+     <mat-label>{{entry.name}}</mat-label>
+    
+        
+        
+     <mat-label style="padding-left:52%;"  >{{entry.price}}</mat-label>
+    </div>
+<div style="width: 100%;height: 10%; border-bottom: 2px solid black; padding-top: 2px;" align = "center"></div>
+    <div style="display: flex; flex-direction: row; padding-top: 1%; text-decoration: double;">
+      
+        <mat-label>Sales Tax </mat-label>
+        <div style="width:10%;"></div>
+        <mat-label  style="padding-left: 45%;">{{data.salesTax}}</mat-label>
+        
+       </div>
+       <div style="display: flex; flex-direction: row; padding-top: 1%; text-decoration: double;">
+      
+        <mat-label>Add. Tax </mat-label>
+        <div style="width:10%;"></div>
+        <mat-label  style="padding-left: 47%;">{{data.addTax}}</mat-label>
+        
+       </div>
+
+       <div style="width: 100%;height: 10%; border-bottom: 2px solid black; padding-bottom: 2px;" align = "center"></div>
+       <div class="m-5" style="display: flex; flex-direction: row;">
+      
+        <mat-label>Total: </mat-label>
+        <div style="width:10%;"></div>
+        <mat-label style="padding-left: 50%;">{{data.total}}</mat-label>
+       </div>
+
+ </div>
   
  
 </div>
