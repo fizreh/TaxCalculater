@@ -37,7 +37,7 @@
         <td>
             <mat-form-field class="example-full-width" appearance="legacy">
                 <mat-label>Price</mat-label>
-                <input type="number" matInput placeholder="1234" [(ngModel)] = "price" (onchange)="onTextChange($event)">
+                <input type="number" matInput placeholder="1234" [(ngModel)] = "price" (change)="onTextChange($event)">
                 <mat-icon matSuffix>€</mat-icon>
               </mat-form-field>
               
@@ -51,6 +51,9 @@
       <div align="center">
       <button mat-raised-button color="primary" (click) = "onCategoryChange()" >Add</button>
     </div>
+    <div align="center" *ngIf = "isNotValid === true">
+      <h4 >Please give the required input!</h4>
+      </div>
 
      
 
@@ -75,15 +78,17 @@
 <tr><td></td></tr>
      </ng-container>
    </table>
+   <ng-container *ngIf = "selectedGoods.length > 0">
   <div style="display: flex; flex-direction: row;" *ngFor ="let entry of selectedGoods; let i = index">
     <mat-label >{{i+1}}</mat-label>  
     <mat-label style="padding-left:25%;">{{entry.name}}</mat-label>   
     <mat-label style="padding-left:28%;padding-right:20%;"   >{{entry.price}}</mat-label>
-    <button mat-icon-button style="margin-top: -2%;" color="primary" value="entry.name" (click)="deleteProduct(entry.name)" >
+    <!-- <button mat-icon-button style="margin-top: -2%;" color="primary" value="entry.name" (click)="deleteProduct(entry.name)" >
       <span class="material-icons">delete</span>
-    </button>
+    </button> -->
       
    </div>
+  </ng-container>
   </div>
     <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf = "dataSource">
 
@@ -117,6 +122,7 @@
       <div class="m-5">
       <button mat-raised-button color="primary" (click) = "saveAndCalculateTax()" >Save</button>
       </div>
+      
       
 </mat-card-content>
 

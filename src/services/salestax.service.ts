@@ -14,10 +14,10 @@ export class SalestaxService {
 
 
    
-  productsSpec:productsCombo[] = [{product:'book',salesTax:0,addTax:5/100},
-                                  {product:'medicine',salesTax:0,addTax:5/100},
-                                  {product:'food',salesTax:0,addTax:5/100},
-                                  {product:'anonymous',salesTax:10/100,addTax:5/100}]
+  productsSpec:productsCombo[] = [{product:'book',salesTax:0,addTax:0.05},
+                                  {product:'medicine',salesTax:0,addTax:0.05},
+                                  {product:'food',salesTax:0,addTax:0.05},
+                                  {product:'anonymous',salesTax:0.10,addTax:0.05}]
  
   constructor( ) { }
 
@@ -32,32 +32,33 @@ calculateTax(salesTaxObj:any){
     if(find !== undefined){
       console.log("Entry: ",entry.price);
       console.log("find category:",find.salesTax);
-      entry.salesTax = Number((entry.price * find.salesTax).toFixed(2));
-      entry.price = entry.price + entry.salesTax;
-      if(entry.local === false){
-        entry.addTax =Number((entry.price * find.addTax).toFixed(2));
-        entry.price = entry.price + entry.addTax;
-        
-      }
+      entry.salesTax = Math.round((entry.price * find.salesTax) * 200) / 200.00;
+      if(entry.local === false)
+      entry.addTax =Math.round((entry.price * find.addTax) * 200) / 200.00;
       else
       entry.addTax = 0;
+
+      entry.price =Math.round((entry.price + entry.addTax + entry.salesTax) * 200) / 200.0;
 
     }
 
 
     total += entry.price;
-    totalSalesTax += entry.salesTax;
-    totalAddTax += entry.addTax;
+    totalSalesTax += (entry.salesTax + entry.addTax);
+    
     
 
   }
 
-  totalSalesTax = Number(totalSalesTax.toFixed(2));
-  totalAddTax = Number(totalAddTax.toFixed(2));
-  total = Math.round(total * 20)/ 20.0;
-  console.log("Add Tax:",this.productsSpec[0].addTax);
+  totalSalesTax = Math.round(totalSalesTax * 20) / 20.00;
+ 
+  
+  
+  
+ 
+  console.log("sales Taxes:", totalSalesTax);
   console.log("Total Price:",total);
-  result.push({total:total,salesTax:totalSalesTax,addTax:totalAddTax});
+  result.push({total:total,salesTax:totalSalesTax});
   return result;
 
 }

@@ -16,11 +16,11 @@
 @mixin my-custom-component($theme) {
   // retrieve variables from current theme 
   // only keep those you need and remove the others
-  $text: mat-palette($mat-blue, A200, A100, A400);// map-get($theme, primary);
+  $text: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $primary: mat-palette($mat-blue);
-  $background: mat-palette($mat-gray,A100,A200,A400);
+  
 
   //$foreground: map-get($theme, foreground);
   //$background: map-get($theme, background);
@@ -34,6 +34,9 @@
   h1 {
     color: mat-color($text);
    
+  }
+  h4{
+    color:mat-color($warn);
   }
 }
 

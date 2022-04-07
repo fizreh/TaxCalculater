@@ -27,6 +27,7 @@ export class SalesTaxComponent implements OnInit {
 dataSourceResult:any;
 selectedoption:string = "local";
 validPrice:boolean= true;
+isNotValid : boolean = false;
 
 
 
@@ -37,13 +38,20 @@ validPrice:boolean= true;
 
   onCategoryChange(){
     
+    if(this.price === 0 || this.selectedCategory === "" || this.name === "" || this.selectedoption == "" )
+    {
+      this.isNotValid = true;
+      return;
+    }
+
+  
     this.dataSource ="";
     console.log(this.selectedCategory);
     console.log(this.selectedoption);
     if(this.selectedoption == "imported")
-    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price,salesTax:0,local:false,addTax:0})
+    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price,salesTax:0.00,local:false,addTax:0.00})
     else
-    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price,salesTax:0,local:true,addTax:0})
+    this.selectedGoods.push({category:this.selectedCategory,name:this.name,price:this.price ,salesTax:0.00,local:true,addTax:0.00})
     console.log(this.selectedGoods)
     this.dataSource = this.selectedGoods;
     this.price = 0;
@@ -55,6 +63,7 @@ validPrice:boolean= true;
   deleteProduct(event:string){
     console.log("Delete Event:",event);
     this.selectedGoods = this.selectedGoods.filter((el)=> {el.name === event});
+
 
   }
 
@@ -77,7 +86,7 @@ this.validPrice = false
         finalArr:this.finalArray,
         salesTax:this.finalResult[0].salesTax,
         total:this.finalResult[0].total,
-        addTax: this.finalResult[0].addTax
+        
       }
     })
   
@@ -92,8 +101,9 @@ this.validPrice = false
   
 
   saveAndCalculateTax(){
+   
     console.log("ARRAY FROM SERVICE: ",this.salestaxService.productsSpec);
-    console.log("ARRAY FROM SERVICE: ",this.selectedGoods);
+    console.log("ARRAY FROM COMPONENT: ",this.selectedGoods);
     
     this.finalArray = this.selectedGoods;
     this.finalResult = this.salestaxService.calculateTax(this.selectedGoods);
